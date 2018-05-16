@@ -1,29 +1,40 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <v-app>
+    <div class="container" id="app">
+      <v-toolbar dark>
+        <v-toolbar-title>Flux Trivia Quiz</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items>
+          <v-btn flat>{{new Date() | formatDate}}</v-btn>
+        </v-toolbar-items>
+        <router-link to="/">
+          <v-btn icon>
+            <v-icon>home</v-icon>
+          </v-btn>
+        </router-link>
+        <v-btn icon>
+          <v-icon>list</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <router-view/>
     </div>
-    <router-view/>
-  </div>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+export default {
+  name: 'app',
+  data() {
+    return {
+
     }
   }
 }
+</script>
+
+
+<style lang="scss">
+@import "../node_modules/vuetify/dist/vuetify.min.css";
+@import "../node_modules/material-design-icons-iconfont/dist/material-design-icons.css";
+@import "./assets/style/style.scss";
 </style>
