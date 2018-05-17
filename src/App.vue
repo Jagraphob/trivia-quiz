@@ -12,7 +12,7 @@
             <v-icon>home</v-icon>
           </v-btn>
         </router-link>
-        <v-btn icon>
+        <v-btn icon @click="signIn">
           <v-icon>person</v-icon>
         </v-btn>
       </v-toolbar>
@@ -22,11 +22,26 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'app',
   data() {
     return {
 
+    }
+  },
+  methods: {
+    signIn() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
+      firebase.auth().signInWithPopup(provider).then((result) => {
+        var token = result.credential.accessToken;
+        var user = result.user
+
+        this.$store.commit('signUser', {user: user, token: token})
+      })
     }
   }
 }

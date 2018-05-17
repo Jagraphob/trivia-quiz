@@ -34,9 +34,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import firebase from 'firebase'
-
 export default {
   name: 'home',
   created() {
@@ -46,17 +43,7 @@ export default {
     }
   },
   methods: {
-    signIn() {
-          var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
-    firebase.auth().signInWithPopup(provider).then((result) => {
-      var token = result.credential.accessToken;
-      var user = result.user
 
-      this.$store.commit('signUser', {user: user, token: token})
-    })
-    }
   },
   computed: {
     user () {
