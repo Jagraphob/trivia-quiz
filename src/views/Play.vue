@@ -3,7 +3,10 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'play'
+  name: 'play',
+
 }
 </script>

@@ -12,7 +12,7 @@
             <v-icon>home</v-icon>
           </v-btn>
         </router-link>
-        <v-btn icon @click="signIn">
+        <v-btn icon>
           <v-icon>person</v-icon>
         </v-btn>
       </v-toolbar>

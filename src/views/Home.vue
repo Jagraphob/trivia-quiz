@@ -7,7 +7,7 @@
                 <router-link to="/play">
                 <v-card color="blue-grey darken-2" class="white--text">
                   <v-card-title primary-title>
-                    <h1 class="">PLAY</h1>
+                    <h1 class="headline">PLAY</h1>
                   </v-card-title>
                 </v-card>
                 </router-link>
@@ -29,7 +29,6 @@
           </v-layout>
         </v-container>
       </v-card>
-      {{user}}
   </div>
 </template>
 
