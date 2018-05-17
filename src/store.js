@@ -10,7 +10,7 @@ export default new Vuex.Store({
     token: {}
   },
   mutations: {
-    signUser (state, payload) {
+    signInUser (state, payload) {
       state.user = payload.user
       state.token = payload.token
     }

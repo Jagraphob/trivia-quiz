@@ -27,6 +27,16 @@ import moment from 'moment'
 
 export default {
   name: 'app',
+  created () {
+    firebase.auth().getRedirectResult().then((result) => {
+      if(result.credential) {
+        var token = result.credential.accessToken;
+        var user = result.user
+
+        this.$store.commit('signInUser', {user, token})
+      }
+    })
+  },
   data() {
     return {
 
@@ -37,12 +47,14 @@ export default {
       var provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('profile');
       provider.addScope('email');
-      firebase.auth().signInWithPopup(provider).then((result) => {
-        var token = result.credential.accessToken;
-        var user = result.user
 
-        this.$store.commit('signUser', {user: user, token: token})
-      })
+      firebase.auth().signInWithRedirect(provider)
+      // firebase.auth().signInWithPopup(provider).then((result) => {
+      //   var token = result.credential.accessToken;
+      //   var user = result.user
+
+      //   this.$store.commit('signInUser', {user: user, token: token})
+      // })
     }
   },
   computed: {

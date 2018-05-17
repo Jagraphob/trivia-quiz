@@ -38,6 +38,7 @@ export default {
   name: 'home',
   created() {
     var user = this.$store.state.user
+    console.log(user)
     if(!user) {
       this.signIn()
     }
