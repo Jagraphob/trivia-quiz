@@ -13,7 +13,7 @@
           </v-btn>
         </router-link>
         <v-btn icon>
-          <v-icon>list</v-icon>
+          <v-icon>person</v-icon>
         </v-btn>
       </v-toolbar>
       <router-view/>

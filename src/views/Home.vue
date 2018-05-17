@@ -29,16 +29,39 @@
           </v-layout>
         </v-container>
       </v-card>
+      {{user}}
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import firebase from 'firebase'
 
 export default {
   name: 'home',
-  components: {
+  created() {
+    var user = this.$store.state.user
+    if(!user) {
+      this.signIn()
+    }
+  },
+  methods: {
+    signIn() {
+          var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    firebase.auth().signInWithPopup(provider).then((result) => {
+      var token = result.credential.accessToken;
+      var user = result.user
+
+      this.$store.commit('signUser', {user: user, token: token})
+    })
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
   }
 }
 </script>
