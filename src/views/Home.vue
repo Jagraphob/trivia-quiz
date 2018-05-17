@@ -7,7 +7,7 @@
                 <router-link to="/play">
                 <v-card color="blue-grey darken-2" class="white--text">
                   <v-card-title primary-title>
-                    <h1 class="headline">PLAY</h1>
+                    <h1 class="headline">Quick Play</h1>
                   </v-card-title>
                 </v-card>
                 </router-link>
@@ -15,7 +15,7 @@
             <v-flex xs12>
               <v-card color="deep-purple darken-2" class="white--text">
                 <v-card-title primary-title>
-                  <div class="headline">Your records</div>
+                  <div class="headline">Competitive</div>
                 </v-card-title>
               </v-card>
             </v-flex>
