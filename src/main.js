@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import Vuetify from 'vuetify'
-import moment from 'moment'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
@@ -13,12 +12,6 @@ import 'firebase/firestore'
 Vue.config.productionTip = false
 
 Vue.use(Vuetify)
-
-Vue.filter('formatDate', function(value) {
-  if (value) {
-    return moment(String(value)).format('MMMM DD YYYY')
-  }
-})
 
 var config = {
   apiKey: "AIzaSyBWWqpSCqqIzMDrNiJSVyhXO_3V7cefIv0",

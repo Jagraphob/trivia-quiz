@@ -1,11 +1,11 @@
 <template>
-  <v-app>
-    <div class="container" id="app">
+  <v-app id="app">
+    <div class="container">
       <v-toolbar dark>
         <v-toolbar-title>Flux Trivia Quiz</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn flat>{{new Date() | formatDate}}</v-btn>
+          <v-btn flat>{{now}}</v-btn>
         </v-toolbar-items>
         <router-link to="/">
           <v-btn icon>
@@ -23,6 +23,7 @@
 
 <script>
 import firebase from 'firebase/app'
+import moment from 'moment'
 
 export default {
   name: 'app',
@@ -42,6 +43,11 @@ export default {
 
         this.$store.commit('signUser', {user: user, token: token})
       })
+    }
+  },
+  computed: {
+    now () {
+      return moment().format('DD MMMM YYYY');
     }
   }
 }
