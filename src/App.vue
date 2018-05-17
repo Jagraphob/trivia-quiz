@@ -35,6 +35,11 @@ export default {
 
         this.$store.commit('signInUser', {user, token})
       }
+      else {
+        if(Object.keys(this.user).length === 0) {
+          this.signIn()
+        }
+      }
     })
   },
   data() {
@@ -49,17 +54,14 @@ export default {
       provider.addScope('email');
 
       firebase.auth().signInWithRedirect(provider)
-      // firebase.auth().signInWithPopup(provider).then((result) => {
-      //   var token = result.credential.accessToken;
-      //   var user = result.user
-
-      //   this.$store.commit('signInUser', {user: user, token: token})
-      // })
     }
   },
   computed: {
     now () {
       return moment().format('DD MMMM YYYY');
+    },
+    user () {
+      return this.$store.state.user
     }
   }
 }

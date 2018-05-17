@@ -7,7 +7,7 @@
                 <router-link to="/play">
                 <v-card color="blue-grey darken-2" class="white--text">
                   <v-card-title primary-title>
-                    <div class="headline">PLAY</div>
+                    <h1 class="">PLAY</h1>
                   </v-card-title>
                 </v-card>
                 </router-link>
@@ -37,11 +37,7 @@
 export default {
   name: 'home',
   created() {
-    var user = this.$store.state.user
-    console.log(user)
-    if(!user) {
-      this.signIn()
-    }
+
   },
   methods: {
 
