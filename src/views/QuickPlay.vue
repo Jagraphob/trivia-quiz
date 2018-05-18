@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading-screen v-if="isLoading"></loading-screen>
     <v-alert :value="error" type="error">{{ error }}</v-alert>
     <v-card>
       <v-container grid-list-lg>
@@ -52,11 +53,13 @@
 
 <script>
 import axios from 'axios'
+import loadingScreen from '../components/loadingScreen'
 
 export default {
   name: 'quickplay',
   data () {
     return {
+      isLoading: true,
       questions: [],
       error: "",
       answers: [],
@@ -86,11 +89,14 @@ export default {
             correct_answer: this.decodeHTMLEntities(q.correct_answer)
           }
         })
+        this.isLoading = false
         this.questions = mappedQ
+        
       })
       .catch((error) => {
         console.log(error)
         this.error = "Error Loading Quiz API"
+        this.isLoading = false
       })
   },
   methods: {
@@ -152,6 +158,9 @@ export default {
         return r.correct == true
       }).length
     }
+  },
+  components: {
+    loadingScreen
   }
 }
 </script>
