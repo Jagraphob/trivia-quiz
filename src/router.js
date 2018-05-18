@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Play from './views/Play.vue'
+import QuickPlay from './views/QuickPlay.vue'
 
 Vue.use(Router)
 
@@ -14,9 +14,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/play',
-      name: 'play',
-      component: Play
+      path: '/quickplay',
+      name: 'quickplay',
+      component: QuickPlay
     }
   ]
 })
