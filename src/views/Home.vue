@@ -11,14 +11,18 @@
                 </router-link>
               </v-flex>
             <v-flex xs12 sm6 offset-sm3>
-              <v-card color="deep-purple darken-2" class="white--text" height="80px">
+              <router-link to="/competitive">
+                <v-card color="deep-purple darken-2" class="white--text" height="80px">
                   <h1 class="text-xs-center custom-padding">Competitive</h1>
-              </v-card>
+                </v-card>
+              </router-link>
             </v-flex>
             <v-flex xs12 sm6 offset-sm3>
-              <v-card color="cyan darken-2" class="white--text" height="80px">
-                  <h1 class="text-xs-center custom-padding">Leaderboard</h1>
-              </v-card>
+              <router-link to="/leaderboard">
+                <v-card color="cyan darken-2" class="white--text" height="80px">
+                    <h1 class="text-xs-center custom-padding">Leaderboard</h1>
+                </v-card>
+              </router-link>
             </v-flex>
           </v-layout>
         </v-container>
