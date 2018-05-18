@@ -15,6 +15,9 @@
         <v-btn icon>
           <v-icon>person</v-icon>
         </v-btn>
+        <v-toolbar-items>
+          
+        </v-toolbar-items>
       </v-toolbar>
       <router-view/>
     </div>
@@ -62,6 +65,9 @@ export default {
     },
     user () {
       return this.$store.state.user
+    },
+    userName () {
+      return this.user.displayName.split(' ')[0]
     }
   }
 }
