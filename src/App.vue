@@ -4,20 +4,15 @@
       <v-toolbar dark>
         <v-toolbar-title>Flux Trivia Quiz</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-toolbar-items>
-          <v-btn flat>{{now}}</v-btn>
-        </v-toolbar-items>
+        <h4>{{ now }}</h4>
         <router-link to="/">
           <v-btn icon>
             <v-icon>home</v-icon>
           </v-btn>
         </router-link>
-        <v-btn icon>
-          <v-icon>person</v-icon>
-        </v-btn>
-        <v-toolbar-items>
-          
-        </v-toolbar-items>
+        <v-avatar>
+          <img :src="user.photoURL" />
+        </v-avatar>
       </v-toolbar>
       <router-view/>
     </div>
