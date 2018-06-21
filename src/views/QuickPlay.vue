@@ -100,9 +100,6 @@ export default {
       })
   },
   methods: {
-    RightWrong () {
-
-    },
     reload () {
       this.dialog = false
       location.reload()
