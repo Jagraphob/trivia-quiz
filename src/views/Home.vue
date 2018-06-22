@@ -31,10 +31,31 @@
 </template>
 
 <script>
+import { db } from '../main'
+
 export default {
   name: 'home',
+  data () {
+    return {
+      error: ""
+    }
+  },
   created() {
-
+    db.collection('users').doc(this.user.uid).get().then((doc) => {
+      if(!doc.exists) {
+        db.collection('users').doc(this.user.uid).set({
+          displayName: this.user.displayName,
+          email: this.user.email,
+          photoURL: this.user.photoURL
+        })
+        .then(() => {
+          console.log("Add user to firestore success")
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      }
+    })
   },
   methods: {
 

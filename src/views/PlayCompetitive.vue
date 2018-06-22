@@ -18,7 +18,7 @@
       <div class="row">
         <v-layout row justify-center>
           <v-dialog v-model="dialog" persistent scrollable max-width="700">
-            <v-btn slot="activator" color="success" large>Submit</v-btn>
+            <v-btn slot="activator" color="success" large @click="submit">Submit</v-btn>
             <v-card>
               <v-card-title class="headline">Result: {{score}} out of 10</v-card-title>
               <v-card-text>
@@ -50,6 +50,7 @@
         </v-layout>
       </div>
     </v-card>
+    {{user}}
   </div>
 </template>
 
@@ -96,6 +97,10 @@ export default {
   methods: {
     reset () {
       this.answers = []
+    },
+    submit () {
+      console.log("Score: " + this.score)
+      //TODO: set score in leader board, the lock user out after he played for the day
     }
   },
   computed: {
