@@ -88,7 +88,8 @@ export default {
         last_played: this.today,
         scores: this.playerData.scores + this.score,
         games_played: this.playerData.games_played + 1,
-        player_name: this.playerData.player_name
+        player_name: this.playerData.player_name,
+        player_pic: this.playerData.player_pic
       })
     },
     loadQuiz () {

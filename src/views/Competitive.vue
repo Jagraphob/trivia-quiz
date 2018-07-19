@@ -20,7 +20,6 @@
         </v-layout>
       </v-jumbotron>
     </v-card>
-    {{ user }}
   </div>
 </template>
 
@@ -124,9 +123,10 @@ export default {
         } else {
           db.collection('leaderboard').doc(this.user.uid).set({
             player_name: this.user.displayName,
+            player_pic: this.user.photoURL,
             games_played: 0,
             last_played: null,
-            scores: 0            
+            scores: 0          
           })
         }
       })
