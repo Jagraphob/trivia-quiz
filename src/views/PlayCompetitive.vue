@@ -50,7 +50,6 @@
         </v-layout>
       </div>
     </v-card>
-    {{user}}
   </div>
 </template>
 
@@ -67,6 +66,7 @@ export default {
       questions: [],
       answers: [],
       dialog: false,
+      playerData: {},
       headers: [
         { text: 'Question', value: 'Id', sortable: false, align: 'left' },
         { text: 'Result', value: 'correct', sortable: false, align: 'left' },
@@ -76,31 +76,51 @@ export default {
     }
   },
   created () {
-    var today = new Date()
-    today.setHours(0,0,0,0)
-    
-    db.collection('quizset').where('date', '==', today).get().then((querySnapshot) => {
-      console.log(querySnapshot)
-      if (!querySnapshot.empty) {
-        querySnapshot.forEach((doc) => {
-        this.questions = doc.data().questions
-        this.isLoading = false
-      })} else {
-        this.error = "Questions not loaded, try again later"
-        this.isLoading = false
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    this.initialize()
+    this.loadQuiz()
   },
   methods: {
     reset () {
       this.answers = []
     },
     submit () {
-      console.log("Score: " + this.score)
-      //TODO: set score in leader board, the lock user out after he played for the day
+      db.collection('leaderboard').doc(this.user.uid).set({
+        last_played: this.today,
+        scores: this.playerData.scores + this.score,
+        games_played: this.playerData.games_played + 1,
+        player_name: this.playerData.player_name
+      })
+    },
+    loadQuiz () {
+      db.collection('quizset').where('date', '==', this.today).get().then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          querySnapshot.forEach((doc) => {
+          this.questions = doc.data().questions
+          this.isLoading = false
+        })} else {
+          this.error = "Questions not loaded, try again later"
+          this.isLoading = false
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    initialize () {
+      db.collection('leaderboard').doc(this.user.uid).get().then((doc) => {
+        console.log(doc)
+        if (doc.exists) {
+          var lastPlayed = doc.data().last_played
+          if(lastPlayed && (lastPlayed.seconds * 1000 == this.today.getTime())) {
+            this.$router.push('competitive')
+          } else {
+            this.playerData = doc.data()
+          }
+        } else {
+          this.$router.push('competitive')
+        }
+      })
+      
     }
   },
   computed: {
@@ -123,6 +143,11 @@ export default {
       return this.result.filter((r) => {
         return r.correct == true
       }).length
+    },
+    today () {
+      var today = new Date()
+      today.setHours(0,0,0,0)
+      return today
     }
   },
   components: {
