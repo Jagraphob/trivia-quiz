@@ -5,6 +5,8 @@
     <v-card>
       <v-container grid-list-lg>
         <v-layout row wrap>
+          {{moment}} |
+          {{today}}
           <v-flex xs12 v-for="question in questions" :key="question.Id">
             <v-card color="teal lighten-4">
               <h3>Question {{question.Id + 1}}: {{ question.question}}</h3>
@@ -56,6 +58,7 @@
 <script>
 import { db } from '../main'
 import loadingScreen from '../components/loadingScreen'
+import moment from 'moment'
 
 export default {
   name: 'playcompetitive',
@@ -89,11 +92,14 @@ export default {
         scores: this.playerData.scores + this.score,
         games_played: this.playerData.games_played + 1,
         player_name: this.playerData.player_name,
-        player_pic: this.playerData.player_pic
+        player_pic: this.playerData.player_pic,
+        today_score: this.score
       })
     },
     loadQuiz () {
-      db.collection('quizset').where('date', '==', this.today).get().then((querySnapshot) => {
+      console.log(this.today)
+      db.collection('quizset').where('date', '==', new Date().setHours(0,0,0,0)).get().then((querySnapshot) => {
+        console.log(querySnapshot)
         if (!querySnapshot.empty) {
           querySnapshot.forEach((doc) => {
           this.questions = doc.data().questions
@@ -109,7 +115,6 @@ export default {
     },
     initialize () {
       db.collection('leaderboard').doc(this.user.uid).get().then((doc) => {
-        console.log(doc)
         if (doc.exists) {
           var lastPlayed = doc.data().last_played
           if(lastPlayed && (lastPlayed.seconds * 1000 == this.today.getTime())) {
@@ -121,7 +126,6 @@ export default {
           this.$router.push('competitive')
         }
       })
-      
     }
   },
   computed: {
@@ -130,7 +134,7 @@ export default {
     },
     result () {
       var mappedR = this.questions.map((question, index) => {
-        
+
         return {
           Id: question.Id + 1,
           answer: this.answers[index],
@@ -147,8 +151,13 @@ export default {
     },
     today () {
       var today = new Date()
-      today.setHours(0,0,0,0)
+      //today.setHours(0,0,0,0)
       return today
+    },
+    moment () {
+      var t = Date(moment().unix()*1000)
+      console.log(t)
+      return t
     }
   },
   components: {

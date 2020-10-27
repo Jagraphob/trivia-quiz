@@ -41,6 +41,8 @@ export default {
     }
   },
   created() {
+
+    
     db.collection('users').doc(this.user.uid).get().then((doc) => {
       if(!doc.exists) {
         db.collection('users').doc(this.user.uid).set({

@@ -115,7 +115,6 @@ export default {
     checkPlayedToday () {
       db.collection('leaderboard').doc(this.user.uid).get().then((doc) => {
         if (doc.exists) {
-          console.log(doc.data())
           var lastPlayed = doc.data().last_played
           if (lastPlayed && (lastPlayed.seconds * 1000 == this.today.getTime())) {
             this.playedToday = true
@@ -126,7 +125,7 @@ export default {
             player_pic: this.user.photoURL,
             games_played: 0,
             last_played: null,
-            scores: 0          
+            scores: 0
           })
         }
       })
@@ -135,7 +134,7 @@ export default {
   computed: {
     user () {
       return this.$store.state.user
-    }, 
+    },
     today () {
       var today = new Date()
       today.setHours(0,0,0,0)

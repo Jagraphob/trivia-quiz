@@ -30,7 +30,6 @@ export default {
       if(result.credential) {
         var token = result.credential.accessToken;
         var user = result.user
-
         this.$store.commit('signInUser', {user, token})
       }
       else {
@@ -42,7 +41,6 @@ export default {
   },
   data() {
     return {
-
     }
   },
   methods: {
@@ -67,7 +65,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang="scss">
 @import "../node_modules/vuetify/dist/vuetify.min.css";
