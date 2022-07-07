@@ -11,7 +11,7 @@
     "axios": "^0.18.0",
     "firebase": "^5.0.2",
     "material-design-icons-iconfont": "^3.0.3",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
